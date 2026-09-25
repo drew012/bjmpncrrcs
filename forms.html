@@ -13,138 +13,277 @@
         }
 
         body {
-            background-color: #121131;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background-color: #0b0c1b;
+            color: #ffffff;
             min-height: 100vh;
-            padding: 40px 20px;
-            position: relative;
         }
 
-        /* Back Button Style */
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: #ffffff;
+        /* Top Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: #0f1026;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo-container img {
+            height: 45px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
             text-decoration: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: 500;
             font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .auth-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav-login {
+            border: 1px solid #3b82f6;
+            color: #ffffff;
+            background: transparent;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .btn-nav-login:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-nav-signup {
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
             transition: background-color 0.3s;
         }
 
-        .back-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+        .btn-nav-signup:hover {
+            background-color: #2563eb;
         }
 
-        .form-page-container {
-            background-color: #ffffff;
-            width: 100%;
-            max-width: 600px;
-            padding: 50px 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        /* Hero Header Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+            gap: 40px;
+        }
+
+        .hero-logo-box {
+            flex: 1;
             text-align: center;
         }
 
-        .header-section {
+        .hero-logo-box img {
+            width: 280px;
+            height: auto;
+        }
+
+        .hero-content {
+            flex: 1.5;
+        }
+
+        .hero-content h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            color: #9ca3af;
+            font-size: 15px;
+            line-height: 1.6;
             margin-bottom: 25px;
         }
 
-        .header-section img {
-            height: 90px;
-            width: auto;
-            margin-bottom: 15px;
+        /* Container for Form Links */
+        .forms-section {
+            max-width: 1000px;
+            margin: 20px auto 60px auto;
+            padding: 0 20px;
         }
 
-        .header-section h2 {
-            color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 10px;
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
         }
 
-        .header-section p {
-            color: #7f8c8d;
-            font-size: 15px;
+        /* Form Card Item */
+        .form-card {
+            background-color: #161836;
+            border: 1px solid #23264d;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .form-card:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+        }
+
+        .form-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .form-card-description {
+            font-size: 14px;
+            color: #cbd5e1;
             line-height: 1.5;
         }
 
-        /* Form Link Card Box */
-        .form-link-box {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 25px 20px;
-            margin-top: 15px;
+        .form-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
         }
 
-        .form-link-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-
-        .form-link-description {
-            font-size: 14px;
-            color: #555555;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        /* Direct Link Button */
-        .btn-open-form {
-            display: inline-block;
-            background-color: #3498db;
+        /* Continue Button */
+        .btn-continue {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #2563eb;
             color: #ffffff;
             text-decoration: none;
-            padding: 14px 28px;
-            font-size: 15px;
-            font-weight: bold;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
         }
 
-        .btn-open-form:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+        .btn-continue:hover {
+            background-color: #1d4ed8;
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Back to Home Button -->
-    <a href="index.html" class="back-btn">&larr; Back to Home</a>
-
-    <div class="form-page-container">
-        
-        <div class="header-section">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-container">
             <img src="bjmp.png" alt="BJMP Logo">
-            <h2>Religious Activities Reporting</h2>
-            <p>Welcome to the official reporting portal for BJMP NCR Religious Activities.</p>
         </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Report Final</a></li>
+            <li><a href="#" class="active">Google Forms</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="auth-btns">
+            <a href="login.html" class="btn-nav-login">Login</a>
+            <a href="#" class="btn-nav-signup">Sign Up</a>
+        </div>
+    </nav>
 
-        <!-- Section explaining the link purpose -->
-        <div class="form-link-box">
-            <div class="form-link-title">Submission Form Link</div>
-            <p class="form-link-description">
-                Clicking the link below will open the official Google Form in a new browser tab. 
-                Please log in with your authorized account to submit your monthly activity report.
+    <!-- Main Hero Banner Section -->
+    <section class="hero-section">
+        <div class="hero-logo-box">
+            <img src="bjmp.png" alt="BJMP Regional Chaplaincy Seal">
+        </div>
+        <div class="hero-content">
+            <h1>REGIONAL CHAPLAINCY SECTION</h1>
+            <p>
+                The BJMP Chaplaincy Section is the office responsible for providing spiritual guidance, 
+                religious services, moral values formation, and pastoral care to persons deprived of liberty (PDLs), 
+                BJMP personnel, and their families.
             </p>
+        </div>
+    </section>
 
-            <!-- Link Button -->
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-open-form">
-                Proceed to Google Form &rarr;
-            </a>
+    <!-- Google Forms Links Section -->
+    <section class="forms-section">
+        <h2 class="section-title">Available Google Forms & Reporting Links</h2>
+
+        <!-- Form Link 1 -->
+        <div class="form-card">
+            <div class="form-card-title">1. Monthly Religious Activities Report Form</div>
+            <p class="form-card-description">
+                <strong>Purpose:</strong> This form is used by designated unit chaplains and coordinators to submit monthly logs of religious services, worship sessions, pastoral care, and moral recovery programs provided to PDLs and personnel across NCR facilities.
+            </p>
+            <div class="form-card-footer">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-continue">
+                    Continue to Google Form &rarr;
+                </a>
+            </div>
         </div>
 
-    </div>
+        <!-- Form Link 2 (Optional Additional Form) -->
+        <div class="form-card">
+            <div class="form-card-title">2. Pastoral Care & Incident Feedback Form</div>
+            <p class="form-card-description">
+                <strong>Purpose:</strong> Submit special requests, chaplaincy intervention records, or feedback regarding ongoing moral values formation initiatives in your respective jail facility.
+            </p>
+            <div class="form-card-footer">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-continue">
+                    Continue to Google Form &rarr;
+                </a>
+            </div>
+        </div>
+
+    </section>
 
 </body>
 </html>
