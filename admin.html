@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard</title>
+    <style>
+        /* --- GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121131;
+            color: #333;
+            overflow-x: hidden; /* Prevents unwanted horizontal scrolling on phones */
+        }
+
+        /* --- NAVIGATION BAR (DESKTOP) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #121131;
+            padding: 15px 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 100px; 
+            width: auto;
+            max-width: 100%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff; 
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db; 
+        }
+
+        /* --- AUTH BUTTONS --- */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            color: #3498db;
+            border: 2px solid #3498db;
+            background-color: transparent;
+        }
+
+        .btn-login:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-signup {
+            color: white;
+            background-color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .btn-signup:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        /* --- HERO BANNER SECTION (DESKTOP) --- */
+        .hero-banner {
+            background: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%), url('hand1.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh; 
+            position: relative; 
+        }
+
+        /* --- MOVABLE TEXT (DESKTOP) --- */
+        .hero-content {
+            max-width: 600px;
+            text-align: left; 
+            position: absolute; 
+            top: 50%;    
+            right: 20%;  
+            transform: translateY(-50%); 
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #dddddd;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* --- MOVABLE LOGO (DESKTOP) --- */
+        .hero-logo {
+            position: absolute; 
+            top: 50%;    
+            left: 10%;   
+            transform: translateY(-50%); 
+        }
+
+        .hero-logo img {
+            width: 350px; 
+            max-width: 100%;
+            height: auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #333333;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px; 
+        }
+
+        /* ========================================================= */
+        /* 📱 MOBILE RESPONSIVE STYLES (Applies to screens under 768px) */
+        /* ========================================================= */
+        @media (max-width: 768px) {
+            
+            /* Navbar Mobile adjustments */
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .logo img {
+                height: 70px; /* Smaller navbar logo on phones */
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* Hero Banner Mobile Layout (Stacks content cleanly) */
+            .hero-banner {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+                min-height: auto;
+                text-align: center;
+            }
+
+            /* Reset absolute positions on phone so elements don't overlap */
+            .hero-logo, 
+            .hero-content {
+                position: static;
+                transform: none;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero-logo img {
+                width: 220px; /* Resize hero logo for small screens */
+                margin-bottom: 25px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px; /* Resize heading for phone screens */
+            }
+
+            .hero-content p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="rcs.jpg" alt="Data Portal Logo">
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#report-final">Report Final</a></li>
+            <li><a href="forms.html">Google Forms</a></li>
+            <li><a href="forms2.html">Google access</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="auth-buttons">
+            <a href="login.html" class="btn btn-login">Logout</a>
+                   </div>
+    </nav>
+
+    <!-- HERO BANNER WITH BACKGROUND IMAGE -->
+    <section id="home" class="hero-banner">
+        
+        <!-- THE LOGO -->
+        <div class="hero-logo">
+            <img src="bjmp.png" alt="Hero Logo">
+        </div>
+
+        <!-- THE TEXT CONTENT -->
+        <div class="hero-content">
+            <h1>REGIONAL CHAPLAINCY SECTION</h1>
+            <p>The BJMP Chaplaincy Section is the office responsible for providing spiritual guidance, religious services, moral values formation, and pastoral care to persons deprived of liberty (PDLs), BJMP personnel, and their families.</p>
+            <a href="login.html" class="btn-primary">Log In</a>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 DataPortal. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
