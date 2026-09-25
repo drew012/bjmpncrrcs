@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Forms - BJMP NCR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121131;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Back Button Style */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-page-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .header-section {
+            margin-bottom: 30px;
+        }
+
+        .header-section img {
+            height: 90px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .header-section h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            color: #7f8c8d;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Direct Link Button */
+        .btn-open-form {
+            display: inline-block;
+            background-color: #3498db;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-open-form:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-btn">&larr; Back to Home</a>
+
+    <div class="form-page-container">
+        
+        <div class="header-section">
+            <img src="bjmp.png" alt="BJMP Logo">
+            <h2>Religious Activities Google Form</h2>
+            <p>To ensure you are smoothly signed into your Google account and can submit your report without restrictions, please click the button below to open the form.</p>
+        </div>
+
+        <!-- Opens the form securely in a new tab -->
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-open-form">
+            Open Google Form in New Tab
+        </a>
+
+    </div>
+
+</body>
+</html>

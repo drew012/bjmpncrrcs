@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Sign Up - BJMP NCR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121131;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Back Button Style */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .header-section img {
+            height: 100px;
+            width: auto;
+            margin-bottom: 15px;
+        }
+
+        .header-section h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header-section h3 {
+            color: #555555;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Right Aligned Title */
+        .form-title {
+            text-align: left;
+            color: #3498db;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* Form Fields */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input, 
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 15px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, 
+        .input-group select:focus {
+            border-color: #3498db;
+        }
+
+        /* Two columns for First/Last Name */
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+        .row .input-group {
+            flex: 1;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Home Button -->
+    <a href="index.html" class="back-btn">&larr; Back to Home</a>
+
+    <div class="form-container">
+        
+        <div class="header-section">
+            <img src="bjmp.png" alt="BJMP Logo">
+            <h2>BJMP NCR</h2>
+            <h3>RELIGIOUS ACTIVITIES MONITORING SYSTEM</h3>
+        </div>
+
+        <div class="form-title">
+            OFFICER SIGN UP
+        </div>
+
+        <form action="login.html" method="GET">
+            
+            <div class="row">
+                <div class="input-group">
+                    <label for="firstname">FIRST NAME</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div class="input-group">
+                    <label for="lastname">LAST NAME</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label for="rank">RANK</label>
+                    <select id="rank" name="rank" required>
+                        <option value="" disabled selected>Select Rank</option>
+                        <option value="J01">Jail Officer 1</option>
+                        <option value="J02">Jail Officer 2</option>
+                        <option value="J03">Jail Officer 3</option>
+                        <option value="J04">Jail Officer 4</option>
+                        <option value="SJO1">Senior Jail Officer 1</option>
+                        <option value="SJO2">Senior Jail Officer 2</option>
+                        <option value="SJ03">Senior Jail Officer 3</option>
+                        <option value="SJ04">Senior Jail Officer 4</option>
+                        <option value="JINSP">Jail Inspector</option>
+                        <option value="JSINSP">Jail Senior Inspector</option>
+                        <option value="JSUPT">Jail Superintendent</option>
+                        <option value="JSSUPT">Jail Senior Superintendent</option>
+
+                      
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="age">AGE</label>
+                    <input type="number" id="age" name="age" min="18" max="100" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="jail_destination">JAIL DESTINATION</label>
+                <select id="jail_destination" name="jail_destination" required>
+                    <option value="" disabled selected>Select Destination</option>
+                    <option value="MAKATI CITY JAIL">MAKATI CITY JAIL</option>
+                    <option value="REGIONAL OFFICE">REGIONAL OFFICE</option>
+                    <option value="TAGUIG CITY JAIL">TAGUIG CITY JAIL</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">PASSWORD</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn-submit">REGISTERED AND PROCEED TO LOGIN</button>
+
+        </form>
+    </div>
+
+</body>
+</html>
