@@ -53,7 +53,7 @@
         }
 
         .header-section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .header-section img {
@@ -70,8 +70,31 @@
 
         .header-section p {
             color: #7f8c8d;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.5;
+        }
+
+        /* Form Link Card Box */
+        .form-link-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px 20px;
+            margin-top: 15px;
+        }
+
+        .form-link-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .form-link-description {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         /* Direct Link Button */
@@ -80,8 +103,8 @@
             background-color: #3498db;
             color: #ffffff;
             text-decoration: none;
-            padding: 15px 30px;
-            font-size: 16px;
+            padding: 14px 28px;
+            font-size: 15px;
             font-weight: bold;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.2s;
@@ -103,14 +126,23 @@
         
         <div class="header-section">
             <img src="bjmp.png" alt="BJMP Logo">
-            <h2>Religious Activities Google Form</h2>
-            <p>To ensure you are smoothly signed into your Google account and can submit your report without restrictions, please click the button below to open the form.</p>
+            <h2>Religious Activities Reporting</h2>
+            <p>Welcome to the official reporting portal for BJMP NCR Religious Activities.</p>
         </div>
 
-        <!-- Opens the form securely in a new tab -->
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-open-form">
-            Open Google Form in New Tab
-        </a>
+        <!-- Section explaining the link purpose -->
+        <div class="form-link-box">
+            <div class="form-link-title">Submission Form Link</div>
+            <p class="form-link-description">
+                Clicking the link below will open the official Google Form in a new browser tab. 
+                Please log in with your authorized account to submit your monthly activity report.
+            </p>
+
+            <!-- Link Button -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-open-form">
+                Proceed to Google Form &rarr;
+            </a>
+        </div>
 
     </div>
 
