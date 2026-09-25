@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Forms - BJMP NCR</title>
     <style>
+        /* --- GLOBAL STYLES --- */
         * {
             margin: 0;
             padding: 0;
@@ -16,44 +17,26 @@
             background-color: #0b0c1b;
             color: #ffffff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Top Navigation Bar */
+        /* --- NAVIGATION BAR (COPIED FROM DASHBOARD) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: #121131;
             padding: 15px 50px;
-            background-color: #0f1026;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .navbar .logo-container {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .navbar .logo-container img {
-            height: 45px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: #d1d5db;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: #ffffff;
-            font-weight: 600;
         }
 
         .logo img {
@@ -61,43 +44,63 @@
             width: auto;
             max-width: 100%;
         }
-        
-        .auth-btns {
+
+        .nav-links {
+            list-style: none;
             display: flex;
-            gap: 10px;
+            gap: 30px;
         }
 
-        .btn-nav-login {
-            border: 1px solid #3b82f6;
-            color: #ffffff;
-            background: transparent;
-            padding: 6px 16px;
-            border-radius: 4px;
+        .nav-links a {
             text-decoration: none;
-            font-size: 13px;
-            transition: 0.3s;
+            color: #ffffff; 
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
         }
 
-        .btn-nav-login:hover {
-            background-color: rgba(59, 130, 246, 0.1);
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db; 
         }
 
-        .btn-nav-signup {
-            background-color: #3b82f6;
-            color: #ffffff;
-            padding: 6px 16px;
-            border-radius: 4px;
+        /* --- AUTH BUTTONS (COPIED FROM DASHBOARD) --- */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
             text-decoration: none;
-            font-size: 13px;
+            padding: 8px 20px;
+            border-radius: 5px;
             font-weight: 600;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
-        .btn-nav-signup:hover {
-            background-color: #2563eb;
+        .btn-login {
+            color: #3498db;
+            border: 2px solid #3498db;
+            background-color: transparent;
         }
 
-        /* Hero Header Section */
+        .btn-login:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-signup {
+            color: white;
+            background-color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .btn-signup:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        /* --- HERO HEADER SECTION --- */
         .hero-section {
             display: flex;
             align-items: center;
@@ -138,7 +141,7 @@
             margin-bottom: 25px;
         }
 
-        /* Container for Form Links */
+        /* --- FORMS SECTION --- */
         .forms-section {
             max-width: 1000px;
             margin: 20px auto 60px auto;
@@ -154,7 +157,6 @@
             padding-left: 12px;
         }
 
-        /* Form Card Item */
         .form-card {
             background-color: #161836;
             border: 1px solid #23264d;
@@ -191,7 +193,6 @@
             margin-top: 10px;
         }
 
-        /* Continue Button */
         .btn-continue {
             display: inline-flex;
             align-items: center;
@@ -211,15 +212,36 @@
             transform: translateX(3px);
         }
 
+        /* --- MOBILE RESPONSIVE STYLES --- */
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+
+            .logo img {
+                height: 70px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
             .hero-section {
                 flex-direction: column;
                 text-align: center;
-            }
-
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
             }
         }
     </style>
@@ -230,17 +252,19 @@
     <nav class="navbar">
         <a href="home.html" class="logo">
             <img src="rcs.jpg" alt="Data Portal Logo">
-        </div>
+        </a>
+        
         <ul class="nav-links">
             <li><a href="home.html">Home</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Report Final</a></li>
-            <li><a href="#" class="active">Google Forms</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#reports">Reports</a></li>
+            <li><a href="#report-final">Report Final</a></li>
+            <li><a href="forms.html" class="active">Google Forms</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
+
         <div class="auth-buttons">
-            <a href="login.html" class="btn btn-login">Logout</a>
-                   </div>
+            <a href="index.html" class="btn btn-login">Logout</a>
+        </div>
     </nav>
 
     <!-- Main Hero Banner Section -->
@@ -273,7 +297,7 @@
             </div>
         </div>
 
-        <!-- Form Link 2 (Optional Additional Form) -->
+        <!-- Form Link 2 -->
         <div class="form-card">
             <div class="form-card-title">2. Pastoral Care & Incident Feedback Form</div>
             <p class="form-card-description">
