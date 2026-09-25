@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
             .input('Password', mssql.VarChar, password) // Note: Consider hashing with bcrypt in production
             .query(`
                 INSERT INTO Users (FirstName, LastName, Rank, Age, JailDestination, Username, Password)
-                VALUES (@FirstName, @LastName, @Rank, @Age, @JailDestination, @Username, @Password)
+                VALUES (@firstName, @lastName, @rank, @age, @jailDestination, @username, @password)
             `);
 
         return {
