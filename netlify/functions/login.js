@@ -1,15 +1,16 @@
 const mssql = require('mssql');
 
 // Configure environment variables inside Netlify Site Settings
-const dbConfig = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER, 
-    database: process.env.DB_NAME,
-    options: {
-        encrypt: true, // Required for Azure SQL / Remote MSSQL
-        trustServerCertificate: true
-    }
+const config = {
+  server: process.env.DB_SERVER,                  // rjdrew06-63682.portmap.host
+  port: parseInt(process.env.DB_PORT, 10) || 63682, // 63682
+  database: process.env.DB_NAME,                  // BJMP_NCR_DB
+  user: process.env.DB_USER,                      // sa
+  password: process.env.DB_PASSWORD,              // your password
+  options: {
+    encrypt: false,
+    trustServerCertificate: true
+  }
 };
 
 exports.handler = async (event, context) => {
