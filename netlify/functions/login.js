@@ -1,14 +1,15 @@
 const mssql = require('mssql');
 
 const dbConfig = {
-  server: process.env.DB_SERVER,
-  port: parseInt(process.env.DB_PORT, 10) || 63682,
-  database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER, // rjdrew06-63682.portmap.host
+  port: parseInt(process.env.DB_PORT, 10) || 63682,
+  database: process.env.DB_NAME,
   options: {
     encrypt: false,
-    trustServerCertificate: true
+    trustServerCertificate: true,
+    connectTimeout: 30000 // Increases timeout limit to 30 seconds
   }
 };
 
