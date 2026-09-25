@@ -78,7 +78,7 @@
             font-weight: 500;
         }
 
-        /* Right Aligned Title */
+        /* Form Title */
         .form-title {
             text-align: left;
             color: #3498db;
@@ -126,7 +126,7 @@
             flex: 1;
         }
 
-        /* Submit Button */
+        /* Submit & Back Buttons */
         .btn-submit {
             width: 100%;
             background-color: #3498db;
@@ -144,11 +144,28 @@
         .btn-submit:hover {
             background-color: #2980b9;
         }
+
+        .btn-admin {
+            display: block;
+            width: 100%;
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 12px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn-admin:hover {
+            background-color: #1a252f;
+        }
     </style>
 </head>
 <body>
-
-    
 
     <div class="form-container">
         
@@ -162,7 +179,7 @@
             OFFICER SIGN UP
         </div>
 
-        <form action="index.html" method="GET">
+        <form id="signupForm">
             
             <div class="row">
                 <div class="input-group">
@@ -180,20 +197,18 @@
                     <label for="rank">RANK</label>
                     <select id="rank" name="rank" required>
                         <option value="" disabled selected>Select Rank</option>
-                        <option value="J01">Jail Officer 1</option>
-                        <option value="J02">Jail Officer 2</option>
-                        <option value="J03">Jail Officer 3</option>
-                        <option value="J04">Jail Officer 4</option>
+                        <option value="JO1">Jail Officer 1</option>
+                        <option value="JO2">Jail Officer 2</option>
+                        <option value="JO3">Jail Officer 3</option>
+                        <option value="JO4">Jail Officer 4</option>
                         <option value="SJO1">Senior Jail Officer 1</option>
                         <option value="SJO2">Senior Jail Officer 2</option>
-                        <option value="SJ03">Senior Jail Officer 3</option>
-                        <option value="SJ04">Senior Jail Officer 4</option>
+                        <option value="SJO3">Senior Jail Officer 3</option>
+                        <option value="SJO4">Senior Jail Officer 4</option>
                         <option value="JINSP">Jail Inspector</option>
                         <option value="JSINSP">Jail Senior Inspector</option>
                         <option value="JSUPT">Jail Superintendent</option>
                         <option value="JSSUPT">Jail Senior Superintendent</option>
-
-                      
                     </select>
                 </div>
                 <div class="input-group">
@@ -206,7 +221,8 @@
                 <label for="jail_destination">JAIL DESTINATION</label>
                 <select id="jail_destination" name="jail_destination" required>
                     <option value="" disabled selected>Select Destination</option>
-                    <option value="MAKATI CITY JAIL">CALOOCAN CITY JAIL</option>
+                    <option value="CALOOCAN CITY JAIL">CALOOCAN CITY JAIL</option>
+                    <option value="MAKATI CITY JAIL">MAKATI CITY JAIL</option>
                     <option value="REGIONAL OFFICE">REGIONAL OFFICE</option>
                     <option value="TAGUIG CITY JAIL">TAGUIG CITY JAIL</option>
                 </select>
@@ -214,18 +230,60 @@
 
             <div class="input-group">
                 <label for="username">USERNAME</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required autocomplete="username">
             </div>
 
             <div class="input-group">
                 <label for="password">PASSWORD</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
             </div>
 
-            <button type="submit" class="btn-submit">REGISTERED AND PROCEED TO LOGIN</button>
+            <button type="submit" id="submitBtn" class="btn-submit">REGISTER AND PROCEED TO LOGIN</button>
             <a href="index.html" class="btn-admin">Back to Login</a>
         </form>
     </div>
 
+    <!-- Async Submission Script -->
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "REGISTERING...";
+
+            const payload = {
+                firstname: document.getElementById('firstname').value,
+                lastname: document.getElementById('lastname').value,
+                rank: document.getElementById('rank').value,
+                age: parseInt(document.getElementById('age').value, 10),
+                jail_destination: document.getElementById('jail_destination').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    alert('Registration successful! Redirecting to login page...');
+                    window.location.href = 'index.html';
+                } else {
+                    alert(result.message || 'Registration failed.');
+                }
+            } catch (err) {
+                alert('Connection error. Could not reach serverless backend function.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "REGISTER AND PROCEED TO LOGIN";
+            }
+        });
+    </script>
 </body>
 </html>

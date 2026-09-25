@@ -132,35 +132,73 @@
 </head>
 <body>
 
-    <!-- Back to Home Button -->
-  
-
     <div class="login-container">
         
         <img src="bjmp.png" alt="BJMP Logo">
         <h2>SYSTEM LOGIN</h2>
 
-        <form action="home.html" method="GET">
+        <!-- Updated form element with id="loginForm" -->
+        <form id="loginForm">
             
             <div class="input-group">
                 <label for="login-username">USERNAME</label>
-                <input type="text" id="login-username" name="username" required>
+                <input type="text" id="login-username" name="username" required autocomplete="username">
             </div>
 
             <div class="input-group">
                 <label for="login-password">PASSWORD</label>
-                <input type="password" id="login-password" name="password" required>
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
             </div>
 
-            <button type="submit" class="btn-submit">LOG IN</button>
+            <button type="submit" id="submitBtn" class="btn-submit">LOG IN</button>
 
-           
             <a href="adminlogin.html" class="btn-admin">ADMIN ACCESS</a>
         
             <a href="signup.html" class="btn-admin">Sign Up</a>
 
         </form>
     </div>
+
+    <!-- Added JavaScript Handler for Netlify Serverless Backend -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevents default form submit/page reload
+
+            const usernameInput = document.getElementById('login-username').value;
+            const passwordInput = document.getElementById('login-password').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Indicate loading state
+            submitBtn.disabled = true;
+            submitBtn.innerText = "AUTHENTICATING...";
+
+            try {
+                // Calls netlify/functions/login.js
+                const response = await fetch('/.netlify/functions/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: usernameInput, 
+                        password: passwordInput 
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // Redirect to home page upon database validation
+                    window.location.href = 'home.html';
+                } else {
+                    alert(result.message || 'Invalid username or password.');
+                }
+            } catch (err) {
+                alert('Connection error. Could not reach serverless backend function.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "LOG IN";
+            }
+        });
+    </script>
 
 </body>
 </html>

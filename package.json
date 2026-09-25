@@ -1,0 +1,9 @@
+{
+  "name": "bjmpncrrcs",
+  "version": "1.0.0",
+  "description": "BJMP NCR Monitoring System",
+  "main": "index.html",
+  "dependencies": {
+    "mssql": "^10.0.1"
+  }
+}
