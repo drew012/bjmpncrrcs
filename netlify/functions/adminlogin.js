@@ -31,13 +31,13 @@ exports.handler = async (event, context) => {
         // Query to check if user exists
         let result = await pool.request()
             .input('username', mssql.VarChar, username)
-            .query('SELECT * FROM admin_users WHERE Username = @username');
+            .query('SELECT * FROM admin_users WHERE username = @username');
 
         if (result.recordset.length > 0) {
             const user = result.recordset[0];
             
             // NOTE: Replace with bcrypt password comparison for security in production
-            if (user.Password === password) {
+            if (user.password === password) {
                 return {
                     statusCode: 200,
                     body: JSON.stringify({ success: true, message: 'Login successful' })
