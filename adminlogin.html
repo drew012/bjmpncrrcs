@@ -98,14 +98,6 @@
             border-color: #3498db;
         }
 
-        .error-msg {
-            color: #e74c3c;
-            font-size: 13px;
-            margin-bottom: 15px;
-            text-align: left;
-            display: none;
-        }
-
         .btn-submit {
             width: 100%;
             background-color: #3498db;
@@ -124,6 +116,7 @@
             background-color: #2980b9;
         }
 
+        /* Admin Access Button Style */
         .btn-admin {
             display: block;
             width: 100%;
@@ -152,11 +145,12 @@
         <h2>SYSTEM LOGIN</h2>
         <h3>RELIGIOUS ACTIVITIES MONITORING SYSTEM</h3>
 
-        <form id="adminLoginForm">
+        <!-- Updated form element with id="loginForm" -->
+        <form id="loginForm">
             
             <div class="input-group">
                 <label for="login-username">USERNAME</label>
-                <input type="text" id="login-username" name="admin" required autocomplete="username">
+                <input type="text" id="login-username" name="username" required autocomplete="username">
             </div>
 
             <div class="input-group">
@@ -164,35 +158,27 @@
                 <input type="password" id="login-password" name="password" required autocomplete="current-password">
             </div>
 
-            <div id="error-message" class="error-msg"></div>
+            <button type="submit" id="submitBtn" class="btn-submit">LOG IN</button>
 
-            <button type="submit" id="submitBtn" class="btn-submit">LOG IN AS ADMIN</button>
-            <a href="index.html" class="btn-admin">Back to User Login</a>
-
-        </form>
+                    </form>
     </div>
 
-    <!-- JavaScript Handling Authentication and Preventing Redirection on Failure -->
+    <!-- Added JavaScript Handler for Netlify Serverless Backend -->
     <script>
-        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Stop default browser reload
+        document.getElementById('adminForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevents default form submit/page reload
 
-            const usernameInput = document.getElementById('login-username').value.trim();
-            const passwordInput = document.getElementById('login-password').value.trim();
+            const usernameInput = document.getElementById('login-username').value;
+            const passwordInput = document.getElementById('login-password').value;
             const submitBtn = document.getElementById('submitBtn');
-            const errorDiv = document.getElementById('error-message');
 
-            // Reset error state
-            errorDiv.style.display = 'none';
-            errorDiv.textContent = '';
-
-            // Loading state
+            // Indicate loading state
             submitBtn.disabled = true;
             submitBtn.innerText = "AUTHENTICATING...";
 
             try {
-                // Calls Netlify serverless function endpoint
-                const response = await fetch('/.netlify/functions/admin-login', {
+                // Calls netlify/functions/login.js
+                const response = await fetch('/.netlify/functions/adminlogin', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -204,22 +190,19 @@
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    // SUCCESS: Proceed to admin dashboard
+                    // Redirect to home page upon database validation
                     window.location.href = 'home.html';
                 } else {
-                    // FAILURE: Wrong user or password -> Display error and STAY on page
-                    errorDiv.textContent = result.message || 'Invalid admin username or password.';
-                    errorDiv.style.display = 'block';
+                    alert(result.message || 'Invalid username or password.');
                 }
             } catch (err) {
-                console.error('Login error:', err);
-                errorDiv.textContent = 'Server connection error. Please try again.';
-                errorDiv.style.display = 'block';
+                alert('Connection error. Could not reach serverless backend function.');
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerText = "LOG IN AS ADMIN";
+                submitBtn.innerText = "LOG IN";
             }
         });
     </script>
+
 </body>
 </html>
