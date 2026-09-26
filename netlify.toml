@@ -1,0 +1,5 @@
+[build]
+  functions = "netlify/functions"
+
+[context.production]
+  environment = { NETLIFY_DRAWER = "false" }
