@@ -6,13 +6,18 @@
     <title>Login - BJMP NCR</title>
     <style>
 
-        /* Hide Netlify Drawer Badge */
-            iframe#netlify-identity-widget,     
-            [data-netlify-feedback],
-            .netlify-feedback-button,
-            #netlify-drawer-root {
-            display: none !important;
-        }
+        /* Hide Netlify Floating Badge & AI Prompt Widget */
+iframe[src*="netlify"],
+div[class*="netlify"],
+[data-netlify-badge],
+#netlify-drawer-root,
+.netlify-feedback-button,
+div:has(> button:contains("Powered by Netlify")) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
 
         * {
             margin: 0;
