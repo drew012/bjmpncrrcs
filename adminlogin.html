@@ -60,7 +60,14 @@
         .login-container h2 {
             color: #2c3e50;
             font-size: 22px;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
+        }
+
+        .login-container h3 {
+            color: #555555;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 30px;
         }
 
         .input-group {
@@ -89,6 +96,14 @@
 
         .input-group input:focus {
             border-color: #3498db;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: left;
+            display: none;
         }
 
         .btn-submit {
@@ -133,14 +148,14 @@
 <body>
 
     <!-- Back to Home Button -->
-  
 
     <div class="login-container">
         
         <img src="bjmp.png" alt="BJMP Logo">
         <h2>SYSTEM LOGIN</h2>
+        <h3>RELIGIOUS ACTIVITIES MONITORING SYSTEM</h3>
 
-        <form action="admin.html" method="GET">
+        <form id="loginForm">
             
             <div class="input-group">
                 <label for="login-username">USERNAME</label>
@@ -152,13 +167,15 @@
                 <input type="password" id="login-password" name="password" required>
             </div>
 
-            <button type="submit" class="btn-submit">LOG IN</button>
+            <!-- Error Notification Area -->
+            <div id="error-message" class="error-msg"></div>
 
-            
-            
+            <button type="submit" class="btn-submit">LOG IN</button>
 
         </form>
     </div>
 
+    <!-- Connected JavaScript -->
+    <script src="login.js"></script>
 </body>
 </html>
