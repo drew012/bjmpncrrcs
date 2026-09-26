@@ -5,7 +5,7 @@ const dbConfig = {
   password: process.env.DB_PASSWORD,
   server: process.env.DB_SERVER, // rjdrew06-63682.portmap.host
   port: parseInt(process.env.DB_PORT, 10) || 63682,
-  database: process.env.DB_NAME,
+  database: process.env.DB_NAME, // BJMP_NCR_DB
   options: {
     encrypt: false,
     trustServerCertificate: true,
@@ -14,46 +14,56 @@ const dbConfig = {
 };
 
 exports.handler = async (event, context) => {
-    // Restrict request method to POST
-    if (event.httpMethod !== 'POST') {
-        return { 
-            statusCode: 405, 
-            body: JSON.stringify({ success: false, message: 'Method Not Allowed' }) 
-        };
+  // Restrict request method to POST
+  if (event.httpMethod !== 'POST') {
+    return { 
+      statusCode: 405, 
+      body: JSON.stringify({ success: false, message: 'Method Not Allowed' }) 
+    };
+  }
+
+  try {
+    const { username, password } = JSON.parse(event.body);
+
+    if (!username || !password) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ success: false, message: 'Username and password are required.' })
+      };
     }
 
-    try {
-        const { adminusername, adminpassword } = JSON.parse(event.body);
+    // Connect to SQL Server
+    let pool = await mssql.connect(dbConfig);
+    
+    // Query to check if user exists in the admin_users table
+    let result = await pool.request()
+      .input('username', mssql.VarChar, username.trim())
+      .query('SELECT * FROM admin_users WHERE LOWER(TRIM(username)) = LOWER(@username)');
 
-        // Connect to SQL Server
-        let pool = await mssql.connect(dbConfig);
-        
-        // Query to check if user exists
-        let result = await pool.request()
-            .input('adminusername', mssql.VarChar, adminusername)
-            .query('SELECT * FROM Users WHERE adminusername = @adminusername');
+    if (result.recordset.length > 0) {
+      const user = result.recordset[0];
+      
+      // Trim database password to safely handle any trailing padding from SQL
+      const dbPassword = user.password ? user.password.toString().trim() : '';
+      const inputPassword = password.trim();
 
-        if (result.recordset.length > 0) {
-            const user = result.recordset[0];
-            
-            // NOTE: Replace with bcrypt password comparison for security in production
-            if (user.adminpassword === adminpassword) {
-                return {
-                    statusCode: 200,
-                    body: JSON.stringify({ success: true, message: 'Login successful' })
-                };
-            }
-        }
-
+      if (dbPassword === inputPassword) {
         return {
-            statusCode: 401,
-            body: JSON.stringify({ success: false, message: 'Invalid username or password' })
+          statusCode: 200,
+          body: JSON.stringify({ success: true, message: 'Login successful' })
         };
-
-    } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ success: false, message: error.message })
-        };
+      }
     }
+
+    return {
+      statusCode: 401,
+      body: JSON.stringify({ success: false, message: 'Invalid username or password' })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ success: false, message: error.message })
+    };
+  }
 };

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - BJMP NCR</title>
+    <title>Admin Login - BJMP NCR</title>
     <style>
         * {
             margin: 0;
@@ -116,7 +116,6 @@
             background-color: #2980b9;
         }
 
-        /* Admin Access Button Style */
         .btn-admin {
             display: block;
             width: 100%;
@@ -139,18 +138,19 @@
 </head>
 <body>
 
+    <a href="index.html" class="back-btn">← Back</a>
+
     <div class="login-container">
         
         <img src="bjmp.png" alt="BJMP Logo">
-        <h2>SYSTEM LOGIN</h2>
+        <h2>ADMIN LOGIN</h2>
         <h3>RELIGIOUS ACTIVITIES MONITORING SYSTEM</h3>
 
-        <!-- Updated form element with id="loginForm" -->
         <form id="loginForm">
             
             <div class="input-group">
                 <label for="login-adminusername">ADMIN USERNAME</label>
-                <input type="text" id="login-adminusername" name="adminusername" required autocomplete="adminusername">
+                <input type="text" id="login-adminusername" name="adminusername" required autocomplete="username">
             </div>
 
             <div class="input-group">
@@ -160,10 +160,10 @@
 
             <button type="submit" id="submitBtn" class="btn-submit">LOG IN</button>
 
-                    </form>
+        </form>
     </div>
 
-    <!-- Added JavaScript Handler for Netlify Serverless Backend -->
+    <!-- JavaScript Handler for Netlify Serverless Backend -->
     <script>
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault(); // Prevents default form submit/page reload
@@ -177,7 +177,7 @@
             submitBtn.innerText = "AUTHENTICATING...";
 
             try {
-                // Calls netlify/functions/login.js
+                // Calls netlify/functions/adminlogin.js
                 const response = await fetch('/.netlify/functions/adminlogin', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -190,7 +190,7 @@
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    // Redirect to home page upon database validation
+                    // Redirect to admin dashboard page
                     window.location.href = 'home.html';
                 } else {
                     alert(result.message || 'Invalid username or password.');
