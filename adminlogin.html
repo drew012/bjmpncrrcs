@@ -124,7 +124,6 @@
             background-color: #2980b9;
         }
 
-        /* Admin Access Button Style */
         .btn-admin {
             display: block;
             width: 100%;
@@ -147,35 +146,80 @@
 </head>
 <body>
 
-    <!-- Back to Home Button -->
-
     <div class="login-container">
         
         <img src="bjmp.png" alt="BJMP Logo">
         <h2>SYSTEM LOGIN</h2>
         <h3>RELIGIOUS ACTIVITIES MONITORING SYSTEM</h3>
 
-        <form id="loginForm">
+        <form id="adminLoginForm">
             
             <div class="input-group">
                 <label for="login-username">USERNAME</label>
-                <input type="text" id="login-username" name="admin" required>
+                <input type="text" id="login-username" name="admin" required autocomplete="username">
             </div>
 
             <div class="input-group">
                 <label for="login-password">PASSWORD</label>
-                <input type="password" id="login-password" name="password" required>
+                <input type="password" id="login-password" name="password" required autocomplete="current-password">
             </div>
 
-            <!-- Error Notification Area -->
             <div id="error-message" class="error-msg"></div>
 
-            <button type="submit" class="btn-submit">LOG IN</button>
+            <button type="submit" id="submitBtn" class="btn-submit">LOG IN AS ADMIN</button>
+            <a href="index.html" class="btn-admin">Back to User Login</a>
 
         </form>
     </div>
 
-    <!-- Connected JavaScript -->
-    <script src="login.js"></script>
+    <!-- JavaScript Handling Authentication and Preventing Redirection on Failure -->
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Stop default browser reload
+
+            const usernameInput = document.getElementById('login-username').value.trim();
+            const passwordInput = document.getElementById('login-password').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('error-message');
+
+            // Reset error state
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerText = "AUTHENTICATING...";
+
+            try {
+                // Calls Netlify serverless function endpoint
+                const response = await fetch('/.netlify/functions/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        username: usernameInput, 
+                        password: passwordInput 
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // SUCCESS: Proceed to admin dashboard
+                    window.location.href = 'home.html';
+                } else {
+                    // FAILURE: Wrong user or password -> Display error and STAY on page
+                    errorDiv.textContent = result.message || 'Invalid admin username or password.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Login error:', err);
+                errorDiv.textContent = 'Server connection error. Please try again.';
+                errorDiv.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "LOG IN AS ADMIN";
+            }
+        });
+    </script>
 </body>
 </html>
