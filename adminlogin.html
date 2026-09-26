@@ -149,13 +149,13 @@
         <form id="loginForm">
             
             <div class="input-group">
-                <label for="login-username">USERNAME</label>
-                <input type="text" id="login-username" name="username" required autocomplete="username">
+                <label for="login-adminusername">ADMIN USERNAME</label>
+                <input type="text" id="login-adminusername" name="adminusername" required autocomplete="adminusername">
             </div>
 
             <div class="input-group">
-                <label for="login-password">PASSWORD</label>
-                <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                <label for="login-adminpassword">ADMIN PASSWORD</label>
+                <input type="password" id="login-adminpassword" name="adminpassword" required autocomplete="current-password">
             </div>
 
             <button type="submit" id="submitBtn" class="btn-submit">LOG IN</button>
@@ -168,8 +168,8 @@
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault(); // Prevents default form submit/page reload
 
-            const usernameInput = document.getElementById('login-username').value;
-            const passwordInput = document.getElementById('login-password').value;
+            const usernameInput = document.getElementById('login-adminusername').value;
+            const passwordInput = document.getElementById('login-adminpassword').value;
             const submitBtn = document.getElementById('submitBtn');
 
             // Indicate loading state

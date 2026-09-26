@@ -23,21 +23,21 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const { username, password } = JSON.parse(event.body);
+        const { adminusername, adminpassword } = JSON.parse(event.body);
 
         // Connect to SQL Server
         let pool = await mssql.connect(dbConfig);
         
         // Query to check if user exists
         let result = await pool.request()
-            .input('username', mssql.VarChar, username)
-            .query('SELECT * FROM admin_users WHERE username = @username');
+            .input('adminusername', mssql.VarChar, adminusername)
+            .query('SELECT * FROM Users WHERE adminusername = @adminusername');
 
         if (result.recordset.length > 0) {
-            const admin_users = result.recordset[0];
+            const user = result.recordset[0];
             
             // NOTE: Replace with bcrypt password comparison for security in production
-            if (admin_users.password === password) {
+            if (user.adminpassword === adminpassword) {
                 return {
                     statusCode: 200,
                     body: JSON.stringify({ success: true, message: 'Login successful' })
