@@ -34,10 +34,10 @@ exports.handler = async (event, context) => {
             .query('SELECT * FROM admin_users WHERE username = @username');
 
         if (result.recordset.length > 0) {
-            const user = result.recordset[0];
+            const admin_users = result.recordset[0];
             
             // NOTE: Replace with bcrypt password comparison for security in production
-            if (user.password === password) {
+            if (admin_users.password === password) {
                 return {
                     statusCode: 200,
                     body: JSON.stringify({ success: true, message: 'Login successful' })
