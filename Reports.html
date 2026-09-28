@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dashboard</title>
+    <title>Google Forms - BJMP NCR</title>
     <style>
         /* --- GLOBAL STYLES --- */
         * {
@@ -14,12 +14,13 @@
         }
 
         body {
-            background-color: #121131;
-            color: #333;
-            overflow-x: hidden; /* Prevents unwanted horizontal scrolling on phones */
+            background-color: #0b0c1b;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- NAVIGATION BAR (DESKTOP) --- */
+        /* --- NAVIGATION BAR (COPIED FROM DASHBOARD) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -58,11 +59,12 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: #3498db; 
         }
 
-        /* --- AUTH BUTTONS --- */
+        /* --- AUTH BUTTONS (COPIED FROM DASHBOARD) --- */
         .auth-buttons {
             display: flex;
             gap: 15px;
@@ -98,84 +100,120 @@
             border-color: #2980b9;
         }
 
-        /* --- HERO BANNER SECTION (DESKTOP) --- */
-        .hero-banner {
-            background: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%), url('hand1.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 70vh; 
-            position: relative; 
+        /* --- HERO HEADER SECTION --- */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+            gap: 40px;
         }
 
-        /* --- MOVABLE TEXT (DESKTOP) --- */
-        .hero-content {
-            max-width: 600px;
-            text-align: left; 
-            position: absolute; 
-            top: 50%;    
-            right: 20%;  
-            transform: translateY(-50%); 
+        .hero-logo-box {
+            flex: 1;
+            text-align: center;
         }
 
-        .hero-content h1 {
-            font-size: 48px;
-            color: #ffffff;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero-content p {
-            font-size: 18px;
-            color: #dddddd;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        /* --- MOVABLE LOGO (DESKTOP) --- */
-        .hero-logo {
-            position: absolute; 
-            top: 50%;    
-            left: 10%;   
-            transform: translateY(-50%); 
-        }
-
-        .hero-logo img {
-            width: 350px; 
-            max-width: 100%;
+        .hero-logo-box img {
+            width: 280px;
             height: auto;
         }
 
-        .btn-primary {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #333333;
-            padding: 12px 30px;
+        .hero-content {
+            flex: 1.5;
+        }
+
+        .hero-content h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-content p {
+            color: #9ca3af;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* --- FORMS SECTION --- */
+        .forms-section {
+            max-width: 1000px;
+            margin: 20px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 12px;
+        }
+
+        .form-card {
+            background-color: #161836;
+            border: 1px solid #23264d;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .form-card:hover {
+            transform: translateY(-2px);
+            border-color: #3b82f6;
+        }
+
+        .form-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .form-card-description {
+            font-size: 14px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .form-card-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .btn-continue {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #2563eb;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        .btn-primary:hover {
-            background-color: #e0e0e0;
+        .btn-continue:hover {
+            background-color: #1d4ed8;
+            transform: translateX(3px);
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px; 
-        }
-
-        /* ========================================================= */
-        /* 📱 MOBILE RESPONSIVE STYLES (Applies to screens under 768px) */
-        /* ========================================================= */
+        /* --- MOBILE RESPONSIVE STYLES --- */
         @media (max-width: 768px) {
-            
-            /* Navbar Mobile adjustments */
             .navbar {
                 flex-direction: column;
                 padding: 15px 20px;
@@ -183,7 +221,7 @@
             }
 
             .logo img {
-                height: 70px; /* Smaller navbar logo on phones */
+                height: 70px;
             }
 
             .nav-links {
@@ -201,44 +239,16 @@
                 justify-content: center;
             }
 
-            /* Hero Banner Mobile Layout (Stacks content cleanly) */
-            .hero-banner {
-                display: flex;
+            .hero-section {
                 flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                padding: 40px 20px;
-                min-height: auto;
                 text-align: center;
-            }
-
-            /* Reset absolute positions on phone so elements don't overlap */
-            .hero-logo, 
-            .hero-content {
-                position: static;
-                transform: none;
-                max-width: 100%;
-                text-align: center;
-            }
-
-            .hero-logo img {
-                width: 220px; /* Resize hero logo for small screens */
-                margin-bottom: 25px;
-            }
-
-            .hero-content h1 {
-                font-size: 28px; /* Resize heading for phone screens */
-            }
-
-            .hero-content p {
-                font-size: 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION BAR -->
+    <!-- Top Navigation Bar -->
     <nav class="navbar">
         <a href="home.html" class="logo">
             <img src="rcs.jpg" alt="Data Portal Logo">
@@ -246,38 +256,60 @@
         
         <ul class="nav-links">
             <li><a href="home.html">Home</a></li>
-            <li><a href="#reports">Reports</a></li>
+            <li><a href="Reports.html" class="active">Reports</a></li>
             <li><a href="#report-final">Report Final</a></li>
-            <li><a href="forms.html">Google Forms</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
 
         <div class="auth-buttons">
             <a href="index.html" class="btn btn-login">Logout</a>
-                   </div>
+        </div>
     </nav>
 
-    <!-- HERO BANNER WITH BACKGROUND IMAGE -->
-    <section id="home" class="hero-banner">
-        
-        <!-- THE LOGO -->
-        <div class="hero-logo">
-            <img src="bjmp.png" alt="Hero Logo">
+    <!-- Main Hero Banner Section -->
+    <section class="hero-section">
+        <div class="hero-logo-box">
+            <img src="bjmp.png" alt="BJMP Regional Chaplaincy Seal">
+        </div>
+        <div class="hero-content">
+            <h1>VALUES FOCUS DISCUSSION</h1>
+            <p>
+                Kindly submit your Weekly After Activity Report (AAR) on the conduct of Values Focus during Flag Ceremony or any available Opportunity Time in your respective jail unit assignment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Google Forms Links Section -->
+    <section class="forms-section">
+        <h2 class="section-title">Available Google Forms & Reporting Links</h2>
+
+        <!-- Form Link 1 -->
+        <div class="form-card">
+            <div class="form-card-title">Weekly After Activity Report (AAR)</div>
+            <p class="form-card-description">
+                <strong>Purpose:</strong> This form is for submission of Weekly After Activity Report (AAR) on the conduct of Values Focus during Flag Ceremony or any available Opportunity Time in your respective jail unit assignment.
+            </p>
+            <div class="form-card-footer">
+                <a href="forms.html" class="btn-continue">
+                    SUBMIT &rarr;
+                </a>
+            </div>
         </div>
 
-        <!-- THE TEXT CONTENT -->
-        <div class="hero-content">
-            <h1>REGIONAL CHAPLAINCY SECTION</h1>
-            <p></p>
-            
+        <!-- Form Link 2 -->
+        <div class="form-card">
+            <div class="form-card-title">2. Pastoral Care & Incident Feedback Form</div>
+            <p class="form-card-description">
+                <strong>Purpose:</strong> Submit special requests, chaplaincy intervention records, or feedback regarding ongoing moral values formation initiatives in your respective jail facility.
+            </p>
+            <div class="form-card-footer">
+                <a href="forms.html" class="btn-continue">
+                    SUBMIT &rarr;
+                </a>
+            </div>
         </div>
 
     </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 DataPortal. All rights reserved.</p>
-    </footer>
 
 </body>
 </html>

@@ -212,6 +212,52 @@
             transform: translateX(3px);
         }
 
+        .file-upload-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-upload-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .file-upload-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .line-input {
+            width: 100%;
+            max-width: 420px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #60a5fa;
+            color: #ffffff;
+            font-size: 16px;
+            padding: 8px 0;
+            outline: none;
+        }
+
+        .line-input::placeholder {
+            color: #9ca3af;
+        }
+
         /* --- MOBILE RESPONSIVE STYLES --- */
         @media (max-width: 768px) {
             .navbar {
@@ -255,10 +301,9 @@
         </a>
         
         <ul class="nav-links">
-            <li><a href="home.html">Home</a></li>
-            <li><a href="Reports.html">Reports</a></li>
+           <li><a href="home.html">Home</a></li>
+           <li><a href="Reports.html" class="active">Reports</a></li>
             <li><a href="#report-final">Report Final</a></li>
-            <li><a href="forms.html" class="active">Google Forms</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -273,42 +318,219 @@
             <img src="bjmp.png" alt="BJMP Regional Chaplaincy Seal">
         </div>
         <div class="hero-content">
-            <h1>REGIONAL CHAPLAINCY SECTION</h1>
+            <h1>Weekly After Activity Report (AAR)</h1>
             <p>
-                The official portal for designated unit chaplains and coordinators across NCR facilities to submit and monitor monthly religious services, worship sessions, pastoral care, and moral recovery programs for Persons Deprived of Liberty (PDLs) and BJMP personnel.
+                Kindly submit your Weekly After Activity Report (AAR) on the conduct of Values Focus during Flag Ceremony or any available Opportunity Time in your respective jail unit assignment.
             </p>
         </div>
     </section>
 
     <!-- Google Forms Links Section -->
     <section class="forms-section">
-        <h2 class="section-title">Available Google Forms & Reporting Links</h2>
+        <h2 class="section-title">Please ensure submission within the prescribed period for strict compliance.</h2>
+        <h2 class="section-title">Thank you.</h2>
 
         <!-- Form Link 1 -->
         <div class="form-card">
-            <div class="form-card-title">Weekly After Activity Report (AAR)</div>
-            <p class="form-card-description">
-                <strong>Purpose:</strong> This form is for submission of Weekly After Activity Report (AAR) on the conduct of Values Focus during Flag Ceremony or any available Opportunity Time in your respective jail unit assignment.
-            </p>
-            <div class="form-card-footer">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-continue">
-                    Continue to Google Form &rarr;
-                </a>
+            <div class="form-card-title">
             </div>
-        </div>
+            </p>
+            <strong>Name of Jails:</strong> 
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            CALOOCAN CITY JAIL
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            NAVOTAS CITY JAIL
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MALABON CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MALABON CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MANILA CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MANILA CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            VALENZUELA CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            VALENZUELA CIRTY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MARIKINA CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MARIKINA CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            QUEZON CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            QUEZON CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MAKATI CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MAKATI CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PASIG  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PASIG  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            SAN JUAN CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            SAN JUAN CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MANDALUYONG  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MANDALUYONG  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PASAY  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PASAY  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PATEROS MUNICIPAL JAIL
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            LAS PIÑAS CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            LAS PIÑAS CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MUNTINLUPA  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MUNTINLUPA  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PARAÑAQUE  CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            PARAÑAQUE CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MANILA CITY JAIL ANNEX
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            TAGUIG CITY JAIL MD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            TAGUIG CITY JAIL FD
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 1
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 2
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 3
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 4
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 5
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            MMDJ 6
+            </label>
+            <strong>Values Focus Discussed:</strong>
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            Unity
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            Fairness
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            Humility
+            </label>
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            Commitment to Democracy
+            </label>    
+            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
+            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
+            Others:
+            </label>
+            
+            <strong>Date of Activity:</strong>
+            <input type="date" id="activity-date" name="activity-date">
+            </input>
+            <strong>AAR in PDF:</strong>
+            <div class="file-upload-wrapper">
+                <input type="file" id="aar-file" name="aar-file" accept=".pdf" class="file-input">
+                <label for="aar-file" class="file-upload-btn">Add File</label>
+            </div>
+            <strong>Name of Sender:</strong>
+            <input type="text" id="sender-name" name="sender-name" class="line-input" placeholder="Enter sender name">
+            <div class="form-card-footer">
+                <a href="forms.html" class="btn-continue">
+                    Submit &rarr;
+                </a>
+                
+            </div>
+            </div>
 
         <!-- Form Link 2 -->
-        <div class="form-card">
-            <div class="form-card-title">2. Pastoral Care & Incident Feedback Form</div>
-            <p class="form-card-description">
-                <strong>Purpose:</strong> Submit special requests, chaplaincy intervention records, or feedback regarding ongoing moral values formation initiatives in your respective jail facility.
-            </p>
-            <div class="form-card-footer">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgt3Ii-0bKGhKx16zz2UzM1vSGvNKEEj25i54IwG9TXfKwpw/viewform" target="_blank" class="btn-continue">
-                    Continue to Google Form &rarr;
-                </a>
-            </div>
-        </div>
+       
 
     </section>
 
