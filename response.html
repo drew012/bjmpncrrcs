@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAR Responses & Analytics - BJMP NCR</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0c1b;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #23264d;
+        }
+
+        .header h1 {
+            color: #60a5fa;
+            font-size: 26px;
+        }
+
+        .btn-back {
+            background-color: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background-color: #161836;
+            border: 1px solid #23264d;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .chart-card h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 10px;
+        }
+
+        /* Table Section */
+        .table-card {
+            background-color: #161836;
+            border: 1px solid #23264d;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .table-card h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #23264d;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #121131;
+            color: #60a5fa;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>AAR Summary & Analytics</h1>
+            <a href="forms.html" class="btn-back">← Back to Form</a>
+        </div>
+
+        <!-- Graphs Section for Choice Questions -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>Submissions by Jail Units</h3>
+                <canvas id="jailsChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Values Focus Breakdown</h3>
+                <canvas id="valuesChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Individual Responses Table -->
+        <div class="table-card">
+            <h3>Recorded Submissions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date of Activity</th>
+                        <th>Sender Name</th>
+                        <th>Jails Selected</th>
+                        <th>Values Focus</th>
+                        <th>Attachment</th>
+                        <th>Submitted At</th>
+                    </tr>
+                </thead>
+                <tbody id="responseTableBody">
+                    <!-- Dynamic Rows -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const responses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
+
+            // 1. Populate Table
+            const tableBody = document.getElementById('responseTableBody');
+            if (responses.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No submissions recorded yet.</td></tr>';
+            } else {
+                tableBody.innerHTML = responses.map(r => `
+                    <tr>
+                        <td>${r.activityDate || 'N/A'}</td>
+                        <td>${r.senderName || 'N/A'}</td>
+                        <td>${r.jailSelections || 'N/A'}</td>
+                        <td>${r.valuesFocus || 'N/A'}</td>
+                        <td>${r.fileName ? r.fileName : 'None'}</td>
+                        <td>${r.submittedAt || 'N/A'}</td>
+                    </tr>
+                `).join('');
+            }
+
+            // 2. Count Occurrences for Jails Chart
+            const jailCounts = {};
+            responses.forEach(r => {
+                if (r.jailsArray && Array.isArray(r.jailsArray)) {
+                    r.jailsArray.forEach(j => jailCounts[j] = (jailCounts[j] || 0) + 1);
+                } else if (r.jailSelections) {
+                    r.jailSelections.split(', ').forEach(j => jailCounts[j] = (jailCounts[j] || 0) + 1);
+                }
+            });
+
+            // Render Jails Bar Chart
+            new Chart(document.getElementById('jailsChart'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(jailCounts).length ? Object.keys(jailCounts) : ['No Data'],
+                    datasets: [{
+                        label: 'Submissions',
+                        data: Object.values(jailCounts).length ? Object.values(jailCounts) : [0],
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#ffffff' } },
+                        y: { ticks: { color: '#ffffff', stepSize: 1 }, beginAtZero: true }
+                    }
+                }
+            });
+
+            // 3. Count Occurrences for Values Focus Chart
+            const valuesCounts = {};
+            responses.forEach(r => {
+                if (r.valuesArray && Array.isArray(r.valuesArray)) {
+                    r.valuesArray.forEach(v => valuesCounts[v] = (valuesCounts[v] || 0) + 1);
+                } else if (r.valuesFocus) {
+                    r.valuesFocus.split(', ').forEach(v => valuesCounts[v] = (valuesCounts[v] || 0) + 1);
+                }
+            });
+
+            // Render Values Focus Pie Chart
+            new Chart(document.getElementById('valuesChart'), {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(valuesCounts).length ? Object.keys(valuesCounts) : ['No Data'],
+                    datasets: [{
+                        data: Object.values(valuesCounts).length ? Object.values(valuesCounts) : [1],
+                        backgroundColor: ['#60a5fa', '#34d399', '#f39c12', '#e74c3c', '#9b59b6', '#1abc9c']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: '#ffffff' } }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Script to Hide Netlify Badge Overlay -->
+    <script>
+      const removeNetlifyBadge = () => {
+        const badgeElements = document.querySelectorAll(
+          '#netlify-drawer-root, [data-netlify-badge], iframe[src*="netlify"], .netlify-feedback-button'
+        );
+        badgeElements.forEach(el => el.remove());
+
+        document.querySelectorAll('*').forEach(el => {
+          if (el.shadowRoot) {
+            const shadowBadge = el.shadowRoot.querySelectorAll('#netlify-drawer-root, [data-netlify-badge], div[class*="badge"]');
+            shadowBadge.forEach(sb => sb.remove());
+          }
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        removeNetlifyBadge();
+        const observer = new MutationObserver(removeNetlifyBadge);
+        observer.observe(document.body, { childList: true, subtree: true });
+      });
+    </script>
+
+</body>
+</html>

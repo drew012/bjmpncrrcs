@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Forms - BJMP NCR</title>
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +19,6 @@
             overflow-x: hidden;
         }
 
-       
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -64,7 +62,6 @@
             color: #3498db; 
         }
 
-        
         .auth-buttons {
             display: flex;
             gap: 15px;
@@ -89,18 +86,6 @@
             color: white;
         }
 
-        .btn-signup {
-            color: white;
-            background-color: #3498db;
-            border: 2px solid #3498db;
-        }
-
-        .btn-signup:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
-        }
-
-        
         .hero-section {
             display: flex;
             align-items: center;
@@ -141,7 +126,6 @@
             margin-bottom: 25px;
         }
 
-        /* --- FORMS SECTION --- */
         .forms-section {
             max-width: 1000px;
             margin: 20px auto 60px auto;
@@ -173,18 +157,6 @@
         .form-card:hover {
             transform: translateY(-2px);
             border-color: #3b82f6;
-        }
-
-        .form-card-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #60a5fa;
-        }
-
-        .form-card-description {
-            font-size: 14px;
-            color: #cbd5e1;
-            line-height: 1.5;
         }
 
         .form-card-footer {
@@ -260,7 +232,11 @@
             color: #9ca3af;
         }
 
-        
+        .file-name-display {
+            font-size: 13px;
+            color: #60a5fa;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -296,7 +272,6 @@
 </head>
 <body>
 
-    
     <nav class="navbar">
         <a href="home.html" class="logo">
             <img src="rcs.jpg" alt="Data Portal Logo">
@@ -305,8 +280,8 @@
         <ul class="nav-links">
            <li><a href="home.html">Home</a></li>
            <li><a href="Reports.html" class="active">Reports</a></li>
-            <li><a href="#report-final">Report Final</a></li>
-            <li><a href="#contact">Contact</a></li>
+           <li><a href="#report-final">Report Final</a></li>
+           <li><a href="#contact">Contact</a></li>
         </ul>
 
         <div class="auth-buttons">
@@ -314,7 +289,6 @@
         </div>
     </nav>
 
-    
     <section class="hero-section">
         <div class="hero-logo-box">
             <img src="bjmp.png" alt="BJMP Regional Chaplaincy Seal">
@@ -327,212 +301,209 @@
         </div>
     </section>
 
-  
     <section class="forms-section">
         <h2 class="section-title">Please ensure submission within the prescribed period for strict compliance.</h2>
         <h2 class="section-title">Thank you.</h2>
 
-        
         <form id="aarForm">
-        <div class="form-card">
-            <div class="form-card-title">
+            <div class="form-card">
+                <strong>Name of Jails:</strong> 
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="CALOOCAN CITY JAIL"> CALOOCAN CITY JAIL</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="NAVOTAS CITY JAIL"> NAVOTAS CITY JAIL</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MALABON CITY JAIL MD"> MALABON CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MALABON CITY JAIL FD"> MALABON CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MANILA CITY JAIL MD"> MANILA CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MANILA CITY JAIL FD"> MANILA CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="VALENZUELA CITY JAIL MD"> VALENZUELA CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="VALENZUELA CITY JAIL FD"> VALENZUELA CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MARIKINA CITY JAIL MD"> MARIKINA CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MARIKINA CITY JAIL FD"> MARIKINA CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="QUEZON CITY JAIL MD"> QUEZON CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="QUEZON CITY JAIL FD"> QUEZON CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MAKATI CITY JAIL MD"> MAKATI CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MAKATI CITY JAIL FD"> MAKATI CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PASIG CITY JAIL MD"> PASIG CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PASIG CITY JAIL FD"> PASIG CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="SAN JUAN CITY JAIL MD"> SAN JUAN CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="SAN JUAN CITY JAIL FD"> SAN JUAN CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MANDALUYONG CITY JAIL MD"> MANDALUYONG CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MANDALUYONG CITY JAIL FD"> MANDALUYONG CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PASAY CITY JAIL MD"> PASAY CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PASAY CITY JAIL FD"> PASAY CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PATEROS MUNICIPAL JAIL"> PATEROS MUNICIPAL JAIL</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="LAS PIÑAS CITY JAIL MD"> LAS PIÑAS CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="LAS PIÑAS CITY JAIL FD"> LAS PIÑAS CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MUNTINLUPA CITY JAIL MD"> MUNTINLUPA CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MUNTINLUPA CITY JAIL FD"> MUNTINLUPA CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PARAÑAQUE CITY JAIL MD"> PARAÑAQUE CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="PARAÑAQUE CITY JAIL FD"> PARAÑAQUE CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MANILA CITY JAIL ANNEX"> MANILA CITY JAIL ANNEX</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="TAGUIG CITY JAIL MD"> TAGUIG CITY JAIL MD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="TAGUIG CITY JAIL FD"> TAGUIG CITY JAIL FD</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 1"> MMDJ 1</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 2"> MMDJ 2</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 3"> MMDJ 3</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 4"> MMDJ 4</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 5"> MMDJ 5</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="jail_units" value="MMDJ 6"> MMDJ 6</label>
+
+                <strong style="margin-top: 15px;">Values Focus Discussed:</strong>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="values_focus" value="Unity"> Unity</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="values_focus" value="Fairness"> Fairness</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="values_focus" value="Humility"> Humility</label>
+                <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" name="values_focus" value="Commitment to Democracy"> Commitment to Democracy</label>
+                
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <label style="font-family: sans-serif; cursor: pointer;"><input type="checkbox" id="other-values-check" name="values_focus" value="Others"> Others:</label>
+                    <input type="text" id="other-values-text" class="line-input" style="max-width: 250px;" placeholder="Specify if others">
+                </div>
+                
+                <strong style="margin-top: 15px;">Date of Activity:</strong>
+                <input type="date" id="activity-date" name="activity-date" class="line-input" required>
+                
+                <strong style="margin-top: 15px;">AAR in PDF:</strong>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="aar-file" name="aar-file" accept=".pdf" class="file-input">
+                    <label for="aar-file" class="file-upload-btn">Add File</label>
+                    <span id="file-name-display" class="file-name-display">No file chosen</span>
+                </div>
+                
+                <strong style="margin-top: 15px;">Name of Sender:</strong>    
+                <input type="text" id="sender-name" name="sender-name" class="line-input" placeholder="Enter sender name" required>
             </div>
-            </p>
-            <strong>Name of Jails:</strong> 
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            CALOOCAN CITY JAIL
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            NAVOTAS CITY JAIL
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MALABON CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MALABON CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MANILA CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MANILA CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            VALENZUELA CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            VALENZUELA CIRTY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MARIKINA CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MARIKINA CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            QUEZON CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            QUEZON CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MAKATI CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MAKATI CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PASIG  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PASIG  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            SAN JUAN CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            SAN JUAN CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MANDALUYONG  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MANDALUYONG  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PASAY  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PASAY  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PATEROS MUNICIPAL JAIL
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            LAS PIÑAS CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            LAS PIÑAS CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MUNTINLUPA  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MUNTINLUPA  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PARAÑAQUE  CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            PARAÑAQUE CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MANILA CITY JAIL ANNEX
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            TAGUIG CITY JAIL MD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            TAGUIG CITY JAIL FD
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 1
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 2
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 3
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 4
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 5
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            MMDJ 6
-            </label>
-            <strong>Values Focus Discussed:</strong>
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            Unity
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            Fairness
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            Humility
-            </label>
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            Commitment to Democracy
-            </label>    
-            <label for="my-checkbox" style="font-family: sans-serif; cursor: pointer;">
-            <input type="checkbox" id="my-checkbox" name="subscribe" value="yes">
-            Others:
-            </label>
-            
-            <strong>Date of Activity:</strong>
-            <input type="date" id="activity-date" name="activity-date">
-            </input>
-            <strong>AAR in PDF:</strong>
-            <div class="file-upload-wrapper">
-                <input type="file" id="aar-file" name="aar-file" accept=".pdf" class="file-input">
-                <label for="aar-file" class="file-upload-btn">Add File</label>
-            </div>
-            <strong>Name of Sender:</strong>    
-            <input type="text" id="sender-name" name="sender-name" class="line-input" placeholder="Enter sender name">
-            </div>
-            </div>
+
             <div class="form-card-footer">
-            <button type="submit" class="btn-continue">Submit</button>
-            
-        
-        
-       
+                <button type="submit" id="submitBtn" class="btn-continue">Submit</button>
+            </div>
+        </form>
     </section>
+
+    
+    <script>
+        // Display selected PDF filename
+        const fileInput = document.getElementById('aar-file');
+        const fileNameDisplay = document.getElementById('file-name-display');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'No file chosen';
+            }
+        });
+
+        document.getElementById('aarForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerText = "SUBMITTING...";
+
+    try {
+        
+        const selectedJails = Array.from(document.querySelectorAll('input[name="jail_units"]:checked'))
+            .map(cb => cb.value);
+
+        
+        let selectedValues = Array.from(document.querySelectorAll('input[name="values_focus"]:checked'))
+            .map(cb => cb.value);
+        
+        const otherCheck = document.getElementById('other-values-check');
+        const otherText = document.getElementById('other-values-text').value.trim();
+        if (otherCheck && otherCheck.checked && otherText) {
+            selectedValues = selectedValues.filter(v => v !== 'Others');
+            selectedValues.push('Others: ' + otherText);
+        }
+
+        const activityDate = document.getElementById('activity-date').value;
+        const senderName = document.getElementById('sender-name').value;
+
+        
+        const fileInput = document.getElementById('aar-file');
+        let fileName = null;
+        let fileData = null;
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            fileName = file.name;
+            fileData = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = (error) => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        const submissionPayload = {
+            jailSelections: selectedJails.join(', '),
+            jailsArray: selectedJails,
+            valuesFocus: selectedValues.join(', '),
+            valuesArray: selectedValues,
+            activityDate: activityDate,
+            senderName: senderName,
+            fileName: fileName,
+            submittedAt: new Date().toLocaleString()
+        };
+
+        
+        const response = await fetch('/.netlify/functions/submitAAR', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jailSelections: submissionPayload.jailSelections,
+                valuesFocus: submissionPayload.valuesFocus,
+                activityDate: submissionPayload.activityDate,
+                senderName: submissionPayload.senderName,
+                fileName: fileName,
+                fileData: fileData
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            // Save submission to local storage for response dashboard analytics
+            let existingResponses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
+            existingResponses.push(submissionPayload);
+            localStorage.setItem('aar_responses', JSON.stringify(existingResponses));
+
+            alert('AAR submitted successfully!');
+            window.location.href = 'response.html';
+        } else {
+            alert('Submission error: ' + (result.message || 'Unknown error.'));
+        }
+
+    } catch (err) {
+        alert('Connection error: ' + err.message);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit";
+    }
+});
+    </script>
+
+    
+    <script>
+      const removeNetlifyBadge = () => {
+        const badgeElements = document.querySelectorAll(
+          '#netlify-drawer-root, [data-netlify-badge], iframe[src*="netlify"], .netlify-feedback-button'
+        );
+        badgeElements.forEach(el => el.remove());
+
+        document.querySelectorAll('*').forEach(el => {
+          if (el.shadowRoot) {
+            const shadowBadge = el.shadowRoot.querySelectorAll('#netlify-drawer-root, [data-netlify-badge], div[class*="badge"]');
+            shadowBadge.forEach(sb => sb.remove());
+          }
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', () => {
+        removeNetlifyBadge();
+        const observer = new MutationObserver(removeNetlifyBadge);
+        observer.observe(document.body, { childList: true, subtree: true });
+      });
+    </script>
 
 </body>
 </html>
