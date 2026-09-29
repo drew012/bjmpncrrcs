@@ -33,7 +33,6 @@ exports.handler = async (event, context) => {
 
     let pool = await mssql.connect(dbConfig);
 
-    // 1. Check if Username already exists
     let checkUser = await pool.request()
       .input('username', mssql.VarChar, username)
       .query('SELECT Username FROM Users WHERE Username = @username');
@@ -45,7 +44,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // 2. Insert new user into database (Notice matching parameter names @firstName, @lastName, etc.)
+    
     await pool.request()
       .input('firstName', mssql.VarChar, firstname)
       .input('lastName', mssql.VarChar, lastname)
