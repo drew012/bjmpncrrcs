@@ -446,18 +446,19 @@
         };
 
         
-        const response = await fetch('/.netlify/functions/submitAAR', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                jailSelections: submissionPayload.jailSelections,
-                valuesFocus: submissionPayload.valuesFocus,
-                activityDate: submissionPayload.activityDate,
-                senderName: submissionPayload.senderName,
-                fileName: fileName,
-                fileData: fileData
-            })
-        });
+        
+const response = await fetch('/.netlify/functions/aar-submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        jailSelections: submissionPayload.jailSelections,
+        valuesFocus: submissionPayload.valuesFocus,
+        activityDate: submissionPayload.activityDate,
+        senderName: submissionPayload.senderName,
+        fileName: fileName,
+        fileData: fileData
+    })
+});
 
         const result = await response.json();
 
