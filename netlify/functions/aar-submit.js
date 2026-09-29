@@ -9,9 +9,17 @@ const dbConfig = {
   options: {
     encrypt: false,
     trustServerCertificate: true,
-    connectTimeout: 30000 // 30 second timeout for Portmap tunnel
+    connectTimeout: 15000 // 15s connection timeout
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
   }
 };
+
+// Global pool connection cache for Netlify warm starts
+let poolPromise;
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -20,8 +28,6 @@ exports.handler = async (event) => {
       body: JSON.stringify({ success: false, message: 'Method Not Allowed' })
     };
   }
-
-  let pool;
 
   try {
     const body = JSON.parse(event.body || '{}');
@@ -34,7 +40,6 @@ exports.handler = async (event) => {
       fileData
     } = body;
 
-    // Validate required fields
     if (!activityDate || !senderName) {
       return {
         statusCode: 400,
@@ -42,17 +47,19 @@ exports.handler = async (event) => {
       };
     }
 
-    // Strip Data URL prefix if present before converting to Buffer
+    // Convert Base64 data string to Buffer safely
     let fileBuffer = null;
     if (fileData) {
       const cleanBase64 = fileData.includes(',') ? fileData.split(',')[1] : fileData;
       fileBuffer = Buffer.from(cleanBase64, 'base64');
     }
 
-    // Connect to SQL Server
-    pool = await mssql.connect(dbConfig);
+    // Reuse pool connection if existing
+    if (!poolPromise) {
+      poolPromise = mssql.connect(dbConfig);
+    }
+    const pool = await poolPromise;
 
-    // Insert record into AAR_Submissions
     await pool.request()
       .input('JailSelections', mssql.NVarChar(mssql.MAX), jailSelections || '')
       .input('ValuesFocus', mssql.NVarChar(mssql.MAX), valuesFocus || '')
@@ -83,17 +90,17 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ success: true, message: 'AAR submitted successfully.' })
     };
 
   } catch (error) {
+    // Reset pool on connection error so it can retry next call
+    poolPromise = null;
     return {
       statusCode: 500,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ success: false, message: error.message })
     };
-  } finally {
-    if (pool) {
-      await pool.close(); // Clean up connection
-    }
   }
 };

@@ -400,13 +400,21 @@
     submitBtn.innerText = "SUBMITTING...";
 
     try {
-        
-        const selectedJails = Array.from(document.querySelectorAll('input[name="jail_units"]:checked'))
-            .map(cb => cb.value);
+        const fileInput = document.getElementById('aar-file');
 
-        
-        let selectedValues = Array.from(document.querySelectorAll('input[name="values_focus"]:checked'))
-            .map(cb => cb.value);
+        // Check PDF size limit (max 3MB to fit Netlify function size & timeout)
+        if (fileInput.files.length > 0) {
+            const fileSizeMB = fileInput.files[0].size / (1024 * 1024);
+            if (fileSizeMB > 3) {
+                alert('File is too large! Please attach a PDF under 3MB.');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Submit";
+                return;
+            }
+        }
+
+        const selectedJails = Array.from(document.querySelectorAll('input[name="jail_units"]:checked')).map(cb => cb.value);
+        let selectedValues = Array.from(document.querySelectorAll('input[name="values_focus"]:checked')).map(cb => cb.value);
         
         const otherCheck = document.getElementById('other-values-check');
         const otherText = document.getElementById('other-values-text').value.trim();
@@ -418,8 +426,6 @@
         const activityDate = document.getElementById('activity-date').value;
         const senderName = document.getElementById('sender-name').value;
 
-        
-        const fileInput = document.getElementById('aar-file');
         let fileName = null;
         let fileData = null;
 
@@ -445,25 +451,30 @@
             submittedAt: new Date().toLocaleString()
         };
 
-        
-        
-const response = await fetch('/.netlify/functions/aar-submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-        jailSelections: submissionPayload.jailSelections,
-        valuesFocus: submissionPayload.valuesFocus,
-        activityDate: submissionPayload.activityDate,
-        senderName: submissionPayload.senderName,
-        fileName: fileName,
-        fileData: fileData
-    })
-});
+        const response = await fetch('/.netlify/functions/aar-submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                jailSelections: submissionPayload.jailSelections,
+                valuesFocus: submissionPayload.valuesFocus,
+                activityDate: submissionPayload.activityDate,
+                senderName: submissionPayload.senderName,
+                fileName: fileName,
+                fileData: fileData
+            })
+        });
 
-        const result = await response.json();
+        // Safe response parsing to avoid "Unexpected end of JSON input"
+        const responseText = await response.text();
+        let result;
+        try {
+            result = JSON.parse(responseText);
+        } catch (jsonErr) {
+            throw new Error(`Server returned non-JSON response (Status ${response.status}): ${responseText.slice(0, 100)}`);
+        }
 
         if (response.ok && result.success) {
-            // Save submission to local storage for response dashboard analytics
+            // Save to localStorage for response.html charts
             let existingResponses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
             existingResponses.push(submissionPayload);
             localStorage.setItem('aar_responses', JSON.stringify(existingResponses));
@@ -471,7 +482,7 @@ const response = await fetch('/.netlify/functions/aar-submit', {
             alert('AAR submitted successfully!');
             window.location.href = 'response.html';
         } else {
-            alert('Submission error: ' + (result.message || 'Unknown error.'));
+            alert('Submission Error: ' + (result.message || 'Database execution error.'));
         }
 
     } catch (err) {
