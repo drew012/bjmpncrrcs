@@ -184,32 +184,34 @@
             const responses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
 
             // 1. Populate Table with Clickable Download Link
-            const tableBody = document.getElementById('responseTableBody');
-            if (responses.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No submissions recorded yet.</td></tr>';
-            } else {
-                tableBody.innerHTML = responses.map((r, index) => {
-                    // Build clickable file link (using base64 dataUrl if present, or backend fetch route)
-                    let fileHTML = 'None';
-                    if (r.fileData) {
-                        fileHTML = `<a href="${r.fileData}" download="${r.fileName || 'AAR_Report.pdf'}" class="file-link" target="_blank">📄 ${r.fileName || 'Download PDF'}</a>`;
-                    } else if (r.fileName) {
-                        fileHTML = `<a href="/.netlify/functions/getAAR?file=${encodeURIComponent(r.fileName)}" class="file-link" target="_blank">📄 ${r.fileName}</a>`;
-                    }
+            // 1. Populate Table with Clickable Uploaded File
+const tableBody = document.getElementById('responseTableBody');
 
-                    return `
-                        <tr>
-                            <td>${r.activityDate || 'N/A'}</td>
-                            <td>${r.senderName || 'N/A'}</td>
-                            <td>${r.jailSelections || 'N/A'}</td>
-                            <td>${r.valuesFocus || 'N/A'}</td>
-                            <td>${fileHTML}</td>
-                            <td>${r.submittedAt || 'N/A'}</td>
-                        </tr>
-                    `;
-                }).join('');
-            }
+if (responses.length === 0) {
+    tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No submissions recorded yet.</td></tr>';
+} else {
+    tableBody.innerHTML = responses.map(r => {
+        // Render uploaded file as a downloadable/viewable button link
+        let fileDisplay = '<span style="color: #9ca3af;">No File</span>';
+        
+        if (r.fileData) {
+            fileDisplay = `<a href="${r.fileData}" download="${r.fileName || 'AAR_Report.pdf'}" class="file-link" target="_blank">📄 ${r.fileName || 'View Uploaded File'}</a>`;
+        } else if (r.fileName) {
+            fileDisplay = `<span class="file-link">📄 ${r.fileName}</span>`;
+        }
 
+        return `
+            <tr>
+                <td>${r.activityDate || 'N/A'}</td>
+                <td>${r.senderName || 'N/A'}</td>
+                <td>${r.jailSelections || 'N/A'}</td>
+                <td>${r.valuesFocus || 'N/A'}</td>
+                <td>${fileDisplay}</td>
+                <td>${r.submittedAt || 'N/A'}</td>
+            </tr>
+        `;
+    }).join('');
+}
             // 2. Count Occurrences for Jails Chart
             const jailCounts = {};
             responses.forEach(r => {

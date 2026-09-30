@@ -473,14 +473,29 @@
             throw new Error(`Server returned non-JSON response (Status ${response.status}): ${responseText.slice(0, 100)}`);
         }
 
-        if (response.ok && result.success) {
-            // Save to localStorage for response.html charts
-            let existingResponses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
-            existingResponses.push(submissionPayload);
-            localStorage.setItem('aar_responses', JSON.stringify(existingResponses));
+        // In forms.html inside your form submission event listener:
 
-            alert('AAR submitted successfully!');
-            window.location.href = 'response.html';
+if (response.ok && result.success) {
+    // Save submission payload (including fileData) to local storage
+    const submissionPayload = {
+        jailSelections: selectedJails.join(', '),
+        jailsArray: selectedJails,
+        valuesFocus: selectedValues.join(', '),
+        valuesArray: selectedValues,
+        activityDate: activityDate,
+        senderName: senderName,
+        fileName: fileName,
+        fileData: fileData, // <-- Full base64 file data string
+        submittedAt: new Date().toLocaleString()
+    };
+
+    let existingResponses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
+    existingResponses.push(submissionPayload);
+    localStorage.setItem('aar_responses', JSON.stringify(existingResponses));
+
+    alert('AAR submitted successfully!');
+    window.location.href = 'response.html';
+
         } else {
             alert('Submission Error: ' + (result.message || 'Database execution error.'));
         }
