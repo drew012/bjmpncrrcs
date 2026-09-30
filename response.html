@@ -40,6 +40,11 @@
             font-size: 26px;
         }
 
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
         .btn-back {
             background-color: #2563eb;
             color: #ffffff;
@@ -52,6 +57,26 @@
 
         .btn-back:hover {
             background-color: #1d4ed8;
+        }
+
+        .btn-delete {
+            background-color: #dc2626;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #b91c1c;
+        }
+
+        .btn-delete:disabled {
+            background-color: #4b5563;
+            cursor: not-allowed;
         }
 
         /* Charts Grid */
@@ -87,9 +112,15 @@
             overflow-x: auto;
         }
 
+        .table-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
         .table-card h3 {
             color: #ffffff;
-            margin-bottom: 15px;
             font-size: 18px;
             border-left: 4px solid #3b82f6;
             padding-left: 10px;
@@ -116,7 +147,14 @@
             background-color: rgba(255, 255, 255, 0.03);
         }
 
-        /* Clickable Attachment Link Style */
+        /* Checkbox Style */
+        input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            accent-color: #3b82f6;
+        }
+
         .file-link {
             color: #60a5fa;
             text-decoration: underline;
@@ -124,7 +162,6 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            transition: color 0.2s;
         }
 
         .file-link:hover {
@@ -143,10 +180,12 @@
     <div class="container">
         <div class="header">
             <h1>AAR Summary & Analytics</h1>
-            <a href="forms.html" class="btn-back">← Back to Form</a>
+            <div class="header-actions">
+                <a href="forms.html" class="btn-back">← Back to Form</a>
+            </div>
         </div>
 
-        <!-- Graphs Section for Choice Questions -->
+        <!-- Graphs Section -->
         <div class="charts-grid">
             <div class="chart-card">
                 <h3>Submissions by Jail Units</h3>
@@ -158,12 +197,18 @@
             </div>
         </div>
 
-        <!-- Individual Responses Table -->
+        <!-- Individual Responses Table with Delete Option -->
         <div class="table-card">
-            <h3>Recorded Submissions</h3>
+            <div class="table-header-flex">
+                <h3>Recorded Submissions</h3>
+                <button id="deleteBtn" class="btn-delete" onclick="deleteSelected()" disabled>🗑 Delete Selected</button>
+            </div>
             <table>
                 <thead>
                     <tr>
+                        <th style="width: 40px; text-align: center;">
+                            <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)">
+                        </th>
                         <th>Date of Activity</th>
                         <th>Sender Name</th>
                         <th>Jails Selected</th>
@@ -180,39 +225,110 @@
     </div>
 
     <script>
+        let jailsChartInstance = null;
+        let valuesChartInstance = null;
+
         document.addEventListener('DOMContentLoaded', () => {
+            renderDashboard();
+        });
+
+        function renderDashboard() {
             const responses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
 
-            // 1. Populate Table with Clickable Download Link
-            // 1. Populate Table with Clickable Uploaded File
-const tableBody = document.getElementById('responseTableBody');
+            // 1. Populate Table
+            const tableBody = document.getElementById('responseTableBody');
+            if (responses.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No submissions recorded yet.</td></tr>';
+                document.getElementById('selectAll').checked = false;
+                document.getElementById('selectAll').disabled = true;
+            } else {
+                document.getElementById('selectAll').disabled = false;
+                tableBody.innerHTML = responses.map((r, index) => {
+                    let fileDisplay = '<span style="color: #9ca3af;">None</span>';
+                    if (r.fileData) {
+                        fileDisplay = `<a href="${r.fileData}" download="${r.fileName || 'AAR_Report.pdf'}" class="file-link" target="_blank">📄 ${r.fileName || 'Download'}</a>`;
+                    } else if (r.fileName) {
+                        fileDisplay = `<span class="file-link">📄 ${r.fileName}</span>`;
+                    }
 
-if (responses.length === 0) {
-    tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No submissions recorded yet.</td></tr>';
-} else {
-    tableBody.innerHTML = responses.map(r => {
-        // Render uploaded file as a downloadable/viewable button link
-        let fileDisplay = '<span style="color: #9ca3af;">No File</span>';
-        
-        if (r.fileData) {
-            fileDisplay = `<a href="${r.fileData}" download="${r.fileName || 'AAR_Report.pdf'}" class="file-link" target="_blank">📄 ${r.fileName || 'View Uploaded File'}</a>`;
-        } else if (r.fileName) {
-            fileDisplay = `<span class="file-link">📄 ${r.fileName}</span>`;
+                    return `
+                        <tr>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="row-checkbox" data-index="${index}" onclick="updateDeleteBtnState()">
+                            </td>
+                            <td>${r.activityDate || 'N/A'}</td>
+                            <td>${r.senderName || 'N/A'}</td>
+                            <td>${r.jailSelections || 'N/A'}</td>
+                            <td>${r.valuesFocus || 'N/A'}</td>
+                            <td>${fileDisplay}</td>
+                            <td>${r.submittedAt || 'N/A'}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            updateDeleteBtnState();
+            renderCharts(responses);
         }
 
-        return `
-            <tr>
-                <td>${r.activityDate || 'N/A'}</td>
-                <td>${r.senderName || 'N/A'}</td>
-                <td>${r.jailSelections || 'N/A'}</td>
-                <td>${r.valuesFocus || 'N/A'}</td>
-                <td>${fileDisplay}</td>
-                <td>${r.submittedAt || 'N/A'}</td>
-            </tr>
-        `;
-    }).join('');
-}
-            // 2. Count Occurrences for Jails Chart
+        function toggleSelectAll(master) {
+            const checkboxes = document.querySelectorAll('.row-checkbox');
+            checkboxes.forEach(cb => cb.checked = master.checked);
+            updateDeleteBtnState();
+        }
+
+        function updateDeleteBtnState() {
+            const selected = document.querySelectorAll('.row-checkbox:checked');
+            const deleteBtn = document.getElementById('deleteBtn');
+            deleteBtn.disabled = selected.length === 0;
+
+            const total = document.querySelectorAll('.row-checkbox');
+            const selectAll = document.getElementById('selectAll');
+            if (total.length > 0 && selected.length === total.length) {
+                selectAll.checked = true;
+            } else {
+                selectAll.checked = false;
+            }
+        }
+
+        async function deleteSelected() {
+            const checkboxes = Array.from(document.querySelectorAll('.row-checkbox:checked'));
+            if (checkboxes.length === 0) return;
+
+            if (!confirm(`Are you sure you want to delete ${checkboxes.length} selected submission(s)?`)) {
+                return;
+            }
+
+            const indexesToDelete = checkboxes.map(cb => parseInt(cb.getAttribute('data-index'), 10));
+            let responses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
+
+            // Collect file names / submission IDs to sync deletion with SQL Server
+            const fileNamesToDelete = indexesToDelete
+                .map(i => responses[i] ? responses[i].fileName : null)
+                .filter(Boolean);
+
+            // 1. Remove selected items locally
+            responses = responses.filter((_, idx) => !indexesToDelete.includes(idx));
+            localStorage.setItem('aar_responses', JSON.stringify(responses));
+
+            // 2. Send delete request to SQL Server function
+            try {
+                await fetch('/.netlify/functions/aar-delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fileNames: fileNamesToDelete })
+                });
+            } catch (err) {
+                console.warn('Backend DB delete sync failed, deleted locally:', err);
+            }
+
+            // 3. Refresh Dashboard UI
+            renderDashboard();
+            alert('Selected submission(s) deleted successfully!');
+        }
+
+        function renderCharts(responses) {
+            // Count Jails
             const jailCounts = {};
             responses.forEach(r => {
                 if (r.jailsArray && Array.isArray(r.jailsArray)) {
@@ -222,8 +338,8 @@ if (responses.length === 0) {
                 }
             });
 
-            // Render Jails Bar Chart
-            new Chart(document.getElementById('jailsChart'), {
+            if (jailsChartInstance) jailsChartInstance.destroy();
+            jailsChartInstance = new Chart(document.getElementById('jailsChart'), {
                 type: 'bar',
                 data: {
                     labels: Object.keys(jailCounts).length ? Object.keys(jailCounts) : ['No Data'],
@@ -243,7 +359,7 @@ if (responses.length === 0) {
                 }
             });
 
-            // 3. Count Occurrences for Values Focus Chart
+            // Count Values Focus
             const valuesCounts = {};
             responses.forEach(r => {
                 if (r.valuesArray && Array.isArray(r.valuesArray)) {
@@ -253,8 +369,8 @@ if (responses.length === 0) {
                 }
             });
 
-            // Render Values Focus Pie Chart
-            new Chart(document.getElementById('valuesChart'), {
+            if (valuesChartInstance) valuesChartInstance.destroy();
+            valuesChartInstance = new Chart(document.getElementById('valuesChart'), {
                 type: 'pie',
                 data: {
                     labels: Object.keys(valuesCounts).length ? Object.keys(valuesCounts) : ['No Data'],
@@ -270,7 +386,7 @@ if (responses.length === 0) {
                     }
                 }
             });
-        });
+        }
     </script>
 
     <!-- Script to Hide Netlify Badge Overlay -->
