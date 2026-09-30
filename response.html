@@ -116,6 +116,21 @@
             background-color: rgba(255, 255, 255, 0.03);
         }
 
+        /* Clickable Attachment Link Style */
+        .file-link {
+            color: #60a5fa;
+            text-decoration: underline;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .file-link:hover {
+            color: #93c5fd;
+        }
+
         @media (max-width: 768px) {
             .charts-grid {
                 grid-template-columns: 1fr;
@@ -168,21 +183,31 @@
         document.addEventListener('DOMContentLoaded', () => {
             const responses = JSON.parse(localStorage.getItem('aar_responses') || '[]');
 
-            // 1. Populate Table
+            // 1. Populate Table with Clickable Download Link
             const tableBody = document.getElementById('responseTableBody');
             if (responses.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No submissions recorded yet.</td></tr>';
             } else {
-                tableBody.innerHTML = responses.map(r => `
-                    <tr>
-                        <td>${r.activityDate || 'N/A'}</td>
-                        <td>${r.senderName || 'N/A'}</td>
-                        <td>${r.jailSelections || 'N/A'}</td>
-                        <td>${r.valuesFocus || 'N/A'}</td>
-                        <td>${r.fileName ? r.fileName : 'None'}</td>
-                        <td>${r.submittedAt || 'N/A'}</td>
-                    </tr>
-                `).join('');
+                tableBody.innerHTML = responses.map((r, index) => {
+                    // Build clickable file link (using base64 dataUrl if present, or backend fetch route)
+                    let fileHTML = 'None';
+                    if (r.fileData) {
+                        fileHTML = `<a href="${r.fileData}" download="${r.fileName || 'AAR_Report.pdf'}" class="file-link" target="_blank">📄 ${r.fileName || 'Download PDF'}</a>`;
+                    } else if (r.fileName) {
+                        fileHTML = `<a href="/.netlify/functions/getAAR?file=${encodeURIComponent(r.fileName)}" class="file-link" target="_blank">📄 ${r.fileName}</a>`;
+                    }
+
+                    return `
+                        <tr>
+                            <td>${r.activityDate || 'N/A'}</td>
+                            <td>${r.senderName || 'N/A'}</td>
+                            <td>${r.jailSelections || 'N/A'}</td>
+                            <td>${r.valuesFocus || 'N/A'}</td>
+                            <td>${fileHTML}</td>
+                            <td>${r.submittedAt || 'N/A'}</td>
+                        </tr>
+                    `;
+                }).join('');
             }
 
             // 2. Count Occurrences for Jails Chart
